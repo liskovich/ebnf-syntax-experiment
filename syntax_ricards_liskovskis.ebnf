@@ -1,0 +1,70 @@
+<start> ::= "Ricards Liskovskis 221RDB484" 
+( ( <white_space> )+ <class> 
+  ( ( <white_space> )+ 
+    ( <property> | <method> )
+  )+ 
+)+
+
+<class> ::= "Company " <identifier> "="
+<class_init> ::= "Start " <identifier> ( ( <white_space> )+ "Set " <assignment> )+
+
+<method> ::= 
+  "Transaction " <identifier> ":"
+  ( ( <white_space> )+ <expression> )* ( <white_space> )+ 
+  "stop transaction"
+
+<function> ::= 
+  "Process " <identifier> "(" ( <params> )* "):" 
+  ( ( <white_space> )+ <expression> )* ( <white_space> )+ 
+  "stop process def"
+
+<function_call> ::= "Call " <identifier> "(" ( <params> )* ") OK"
+<params> ::= <identifier> ( "," <identifier>)*
+
+<property> ::= ( "pub " | "priv " ) "Asset " ( ( <identifier> " OK" ) | <assignment> )
+<getter> ::= "setter " <identifier> "(" <identifier> ")"
+<setter> ::= "getter " <identifier> "()"
+
+<expression> ::= <assignment> | <for_loop> | <while_loop> | <conditional_if> | <function> | <getter> | <setter> | <function_call>
+
+<for_loop> ::= 
+  "Go through " <identifier> " that each " <identifier> " loop:" 
+  ( ( <white_space> )+ <expression> )* ( <white_space> )+ "stop loop"
+
+<while_loop> ::= 
+  "While " <bool_exp> " loop:" 
+  ( ( <white_space> )+ <expression> )* ( <white_space> )+ "stop loop"
+
+<conditional_if> ::= 
+  "If " <bool_exp> " then:" ( ( <white_space> )+ <expression> )* 
+  ( ( <white_space> )+ <conditional_else_if> )? ( ( <white_space> )+ <conditional_else> )?
+
+<conditional_else_if> ::= 
+  "Else if " <bool_exp> " then:" ( ( <white_space> )+ <expression> )* 
+  ( ( <white_space> )+ <conditional_else_if> )? ( ( <white_space> )+ <conditional_else> )?
+
+<conditional_else> ::= "Else then:" ( ( <white_space> )+ <expression> )*
+
+<bool_exp> ::= <identifier> 
+  | <math_expression> ( " == " | " > " | " < " | " >= " | " <= " | " != " ) <literals> 
+  | <identifier> ( " == " | " > " | " < " | " >= " | " <= " | " != " ) <literals> 
+  | "true" 
+  | "false"
+
+<assignment> ::= <identifier> " is " <literals> " OK"
+
+<literals> ::= <identifier> | <number> | <char_sequence> | <array> | <math_expression> | "true" | "false"
+<array> ::= "[" ( <identifier> | <number> | <char_sequence> ) ( "," <identifier> | <number> | <char_sequence> )* "]"
+
+<identifier> ::= <letter> ( <letter> | <digit> )*
+<number> ::= ("-")? <digit> ( <digit> )*
+<char_sequence> ::= "'"  ( <all_chars> )* "'"
+
+<math_expression> ::= <math_term> " +Debit " <math_term> | <math_term> " -Credit " <math_term> | <math_term>
+<math_term> ::= <factor> " *Investments " <factor> | <factor> " /Dividends " <factor> | <factor>
+<factor> ::= "(" <math_expression> ")" | <number> | <identifier>
+<digit> ::= [0-9]
+<letter> ::= [a-z] | [A-Z]
+
+<white_space> ::= "\n" | " " | "    "
+<all_chars> ::= <digit> | <letter>
