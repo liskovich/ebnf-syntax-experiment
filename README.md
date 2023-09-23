@@ -1,3 +1,13 @@
+# Accountant programming language
+
+## Some features:
+
+- It is somewhat OOP, it contains <b>Companies</b> (classes), <b>Transactions</b> (methods) and <b>Assets</b> (properties)
+- Variables (different length), numbers, arithmetic, assignment
+- Functions, loops (for and while), conditionals, arrays
+- Math operations are: "+Debit", "-Credit", "*Investments" and "/Dividends"
+- Strings may contain only digits, letters, spaces and dollar signs (because accountants like those)
+
 ## Some Syntax That Should work*
 
 *should work in theory - I tested them on the [BNF playground](https://bnfplayground.pauliankline.com/), and many times the editor just crashed. But it works if testing individual components like if statements, loops, etc.
@@ -66,7 +76,7 @@ Company ric=
     Transaction abc:
         If false then:
             value is 'car' OK
-            setter field1(value) OK
+            setter field1(value)
         Else if (2 +Debit 2) == 5 then:
             value is 'bread' OK
         Else then:
